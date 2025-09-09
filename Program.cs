@@ -28,3 +28,23 @@ string currency = Console.ReadLine();
 //Fuel price per gallon
 Console.Write("What is the fuel price per gallon?");
 string price = Console.ReadLine();
+
+//Do some math
+int distance;
+int ConvertedMPH;
+int.TryParse(miles, out distance);
+int.TryParse(MPH, out ConvertedMPH);
+int time = distance / ConvertedMPH;
+TimeSpan.FromMinutes(time).ToString(@"hh\:mm");
+
+
+Console.Clear();
+
+Console.WriteLine("Here is your trip summary:");
+
+Console.WriteLine($"Driver: {driver,20}");
+Console.WriteLine($"Currency: {currency,20}");
+Console.WriteLine("");
+Console.WriteLine($"Miles: {miles,20}");
+Console.WriteLine($"Average speed (MPH): {MPH,20}");
+Console.WriteLine($"Average time driving, {time, 20} ");
