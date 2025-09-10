@@ -1,4 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Net;
+
 Console.WriteLine("We are going to go on a road trip. I will ask you some questions to help create a trip summary for you!");
 
 //Get the destination
@@ -39,12 +41,29 @@ TimeSpan.FromMinutes(time).ToString(@"hh\:mm");
 
 
 Console.Clear();
-
+int length = driver.Length;
 Console.WriteLine("Here is your trip summary:");
+const int space = 30;
 
-Console.WriteLine($"Driver: {driver,20}");
-Console.WriteLine($"Currency: {currency,20}");
-Console.WriteLine("");
-Console.WriteLine($"Miles: {miles,20}");
-Console.WriteLine($"Average speed (MPH): {MPH,20}");
-Console.WriteLine($"Average time driving, {time, 20} ");
+//The number after "space" is the character count of the 
+Console.WriteLine($@"Driver: {driver,space - 8}
+Currency: {currency,space-10}
+
+Miles: {miles,space-7}
+Average speed (MPH): {MPH,space-21}
+Time driving: {time,space - 14}
+
+Miles per Gallon: {MPG, space - 18}
+Fuel Needed: {}
+Range Per tank: 
+Estimated Fuel Stops:
+
+Fuel Cost: {price, space}
+Riders: 
+Cost per Person: 
+Cost per Mile
+Cost per driving hour: 
+
+Average song length: 3.5 min
+Songs needed: 
+");
