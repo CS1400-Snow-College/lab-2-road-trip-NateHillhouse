@@ -32,38 +32,49 @@ Console.Write("What is the fuel price per gallon?");
 string price = Console.ReadLine();
 
 //Do some math
-int distance;
-int ConvertedMPH;
-int.TryParse(miles, out distance);
-int.TryParse(MPH, out ConvertedMPH);
-int time = distance / ConvertedMPH;
-TimeSpan.FromMinutes(time).ToString(@"hh\:mm");
+//Converting the following to double for compatibility
+double.TryParse(miles, out double distance);
+double.TryParse(MPH, out double ConvertedMPH);
+double.TryParse(MPG, out double ConvertedMPG);
+double.TryParse(gallons, out double convertedGallons);
+double tankRange = ConvertedMPG * convertedGallons;
+double.TryParse(passengers, out double Riders);
+double.TryParse(price, out double convertedPrice);
+
+double fuelneeded = distance / ConvertedMPG;
+double fuelcost = convertedPrice * fuelneeded;
+double time = distance / ((double) ConvertedMPH/60); //Converting hours to minutes
+//TimeSpan.FromMinutes(time).ToString(@"hh\:mm");
 
 
 Console.Clear();
-int length = driver.Length;
+Console.WriteLine(time);
+Console.WriteLine(distance);
+Console.WriteLine(ConvertedMPH);
+double length = driver.Length;
 Console.WriteLine("Here is your trip summary:");
 const int space = 30;
+Riders += 1; //For the driver
+//The number after "space" is the character count of the phrase before
 
-//The number after "space" is the character count of the 
-Console.WriteLine($@"Driver: {driver,space - 8}
+Console.WriteLine($@"Driver: {driver, space - 8}
 Currency: {currency,space-10}
 
 Miles: {miles,space-7}
 Average speed (MPH): {MPH,space-21}
-Time driving: {time,space - 14}
+Time driving: {time,space - 14:f0} Minutes
 
-Miles per Gallon: {MPG, space - 18}
-Fuel Needed: {}
-Range Per tank: 
-Estimated Fuel Stops:
+Miles per Gallon: {ConvertedMPG, space - 18}
+Fuel Needed: {fuelneeded, space:f2} Gallons
+Range Per tank: {tankRange, space:f2} Miles
+Estimated Fuel Stops: {distance/tankRange, space:f0f}
 
-Fuel Cost: {price, space}
-Riders: 
-Cost per Person: 
-Cost per Mile
-Cost per driving hour: 
+Fuel Cost: {currency}{fuelcost, space:f2}
+Riders: {Riders, space}
+Cost per Person: {currency}{Riders, space:f2}
+Cost per Mile: {currency}{convertedPrice/distance, space:f2}
+Cost per driving hour: {currency}{fuelcost/time, space:f2}
 
 Average song length: 3.5 min
-Songs needed: 
+Songs needed: {time/3.5:f0}
 ");
