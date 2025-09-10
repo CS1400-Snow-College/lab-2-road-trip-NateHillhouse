@@ -31,6 +31,8 @@ string currency = Console.ReadLine();
 Console.Write("What is the fuel price per gallon?");
 string price = Console.ReadLine();
 
+
+
 //Do some math
 //Converting the following to double for compatibility
 double.TryParse(miles, out double distance);
@@ -45,36 +47,33 @@ double fuelneeded = distance / ConvertedMPG;
 double fuelcost = convertedPrice * fuelneeded;
 double time = distance / ((double) ConvertedMPH/60); //Converting hours to minutes
 //TimeSpan.FromMinutes(time).ToString(@"hh\:mm");
-
+string formattedTime = (time / 60) + "h " + (time % 60) + "m";
 
 Console.Clear();
-Console.WriteLine(time);
-Console.WriteLine(distance);
-Console.WriteLine(ConvertedMPH);
 double length = driver.Length;
 Console.WriteLine("Here is your trip summary:");
-const int space = 30;
+const int space = -30;
 Riders += 1; //For the driver
 //The number after "space" is the character count of the phrase before
 
-Console.WriteLine($@"Driver: {driver, space - 8}
-Currency: {currency,space-10}
+Console.WriteLine($@"{"Driver:", space} {driver}
+{"Currency: ", space}{currency}
 
-Miles: {miles,space-7}
-Average speed (MPH): {MPH,space-21}
-Time driving: {time,space - 14:f0} Minutes
+{"Miles: ", space}{miles}
+{"Average speed (MPH): ", space}{MPH}
+{"Time driving: ", space}{formattedTime:f0}
 
-Miles per Gallon: {ConvertedMPG, space - 18}
-Fuel Needed: {fuelneeded, space:f2} Gallons
-Range Per tank: {tankRange, space:f2} Miles
-Estimated Fuel Stops: {distance/tankRange, space:f0f}
+{"Miles per Gallon: ", space}{ConvertedMPG}
+{"Fuel Needed: ", space}{fuelneeded:f2} Gallons
+{"Range Per tank: ", space}{tankRange:f0} Miles
+{"Estimated Fuel Stops: ", space}{distance/tankRange:f0}
 
-Fuel Cost: {currency}{fuelcost, space:f2}
-Riders: {Riders, space}
-Cost per Person: {currency}{Riders, space:f2}
-Cost per Mile: {currency}{convertedPrice/distance, space:f2}
-Cost per driving hour: {currency}{fuelcost/time, space:f2}
+{"Fuel Cost: ", space}{currency}{fuelcost:f2}
+{"Riders: ", space}{Riders, space-7}
+{"Cost per Person: ", space}{currency}{Riders/fuelcost:f2}
+{"Cost per Mile: ", space}{currency}{fuelcost/distance:f2}
+{"Cost per driving hour: ", space}{currency}{fuelcost/time:f2}
 
-Average song length: 3.5 min
-Songs needed: {time/3.5:f0}
+{"Average song length: ", space}{3.5} min
+{"Songs needed: ", space}{time/3.5:f0}
 ");
