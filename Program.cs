@@ -43,11 +43,11 @@ double tankRange = ConvertedMPG * convertedGallons;
 double.TryParse(passengers, out double Riders);
 double.TryParse(price, out double convertedPrice);
 
-double fuelneeded = distance / ConvertedMPG;
+double fuelneeded = distance / ConvertedMPG *2;
 double fuelcost = convertedPrice * fuelneeded;
 double time = distance / ((double) ConvertedMPH/60); //Converting hours to minutes
 //TimeSpan.FromMinutes(time).ToString(@"hh\:mm");
-string formattedTime = (time / 60) + "h " + (time % 60) + "m";
+string formattedTime = ((int)time / 60) + "h " + ((int)time % 60) + "m";
 
 Console.Clear();
 double length = driver.Length;
@@ -64,15 +64,17 @@ Console.WriteLine($@"{"Driver:", space} {driver}
 {"Time driving: ", space}{formattedTime:f0}
 
 {"Miles per Gallon: ", space}{ConvertedMPG}
-{"Fuel Needed: ", space}{fuelneeded:f2} Gallons
+{"Fuel Needed: ", space}{fuelneeded:f2} Gallons (Round Trip)
 {"Range Per tank: ", space}{tankRange:f0} Miles
-{"Estimated Fuel Stops: ", space}{distance/tankRange:f0}
+{"Estimated Fuel Stops: ", space}{(int)distance/tankRange + 1:f0}
 
+
+{"Gas Price per Gallon: ", space}{currency}{price:f2}
 {"Fuel Cost: ", space}{currency}{fuelcost:f2}
 {"Riders: ", space}{Riders, space-7}
-{"Cost per Person: ", space}{currency}{Riders/fuelcost:f2}
+{"Cost per Person: ", space}{currency}{fuelcost/Riders:f2}
 {"Cost per Mile: ", space}{currency}{fuelcost/distance:f2}
-{"Cost per driving hour: ", space}{currency}{fuelcost/time:f2}
+{"Cost per driving hour: ", space}{currency}{convertedPrice/ConvertedMPG*ConvertedMPH:f2}
 
 {"Average song length: ", space}{3.5} min
 {"Songs needed: ", space}{time/3.5:f0}
